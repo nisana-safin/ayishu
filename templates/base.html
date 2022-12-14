@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>foodie</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link href="{% static 'home/layout/styles/layout.css' %}" rel="stylesheet" type="text/css" media="all">
+</head>
+<body id="top">
+  <div class="wrapper row0">
+      <div id="topbar" class="hoc clear">
+          <div class="fl_right">
+
+          </div>
+          <div class="fl-right">
+           <li id ="searchform">
+                <div>
+                    <form action="{% url 'search' %}" method="get">
+                       {% csrf_token %}
+                        <fieldset>
+
+
+                            <legend>Quick Search:</legend>
+                            <input type="text" placeholder="Enter a search term" name="q">
+                            <button type="submit"><i class="fas fa-search" ></i></button>
+                        </fieldset>
+                    </form>
+                </div>
+              </li>
+          </div>
+      </div>
+  </div>
+  <div class="wrapper row1">
+    <header id="header" class="hoc clear">
+      <div id="logo" class="fl_left">
+        <h1><a href="index.html">FOODIE</a></h1>
+      </div>
+      <nav id="mainav" class="fl_right">
+          <ul class="clear">
+              <li class="active"><a href="/">Home</a></li>
+                <li><a class="active" href="#">Cart</a>
+              {% if user.is_authenticated %}
+              <li><a class="active" href="account/logout">Logout</a>
+              {% else %}
+              <li><a class="active" href="account/register">SignUp</a>
+                <li><a class="active" href="account/login">Login</a>
+                {% endif %}
+              </li>
+          </ul>
+      </nav>
+    </header>
+  </div>
+{% block content %}
+{% endblock %}
+</body>
+</html>
